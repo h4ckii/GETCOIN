@@ -21,7 +21,7 @@ namespace parameters {
   const uint64_t CRYPTONOTE_MAX_BLOCK_NUMBER                   = 600000000;
   const size_t   CRYPTONOTE_MAX_BLOCK_BLOB_SIZE                = 600000000;
   const size_t   CRYPTONOTE_MAX_TX_SIZE                        = 2000000000;
-  const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX       = 0x252d79; // addresses start with "intu"
+  const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX       = 0xef; // addresses start with "intu"
   const size_t   CRYPTONOTE_MINED_MONEY_UNLOCK_WINDOW          = 10;
   const uint64_t CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT            = 60 * 60 * 2;
   const uint64_t CRYPTONOTE_DEFAULT_TX_SPENDABLE_AGE           = 10; //corrected from 100
@@ -110,7 +110,7 @@ namespace parameters {
 
 
 const char     CRYPTONOTE_NAME[]                             = "GETCOIN";
-const char     GENESIS_COINBASE_TX_HEX[]                     = "010a01ff0001904e029b2e4c0281c0b02e7c53291a94d1d0cbff8883f8024f5142ee494ffbbd0880712101128f6e2f5ff1cc0d95bf80839501c07d79fcb80726f3ca8cdc094b0e2d89dfd3";
+const char     GENESIS_COINBASE_TX_HEX[]                     = "";
 
 const uint32_t GENESIS_NONCE                                 = 70;
 const uint64_t GENESIS_TIMESTAMP                             = 1515479625;
