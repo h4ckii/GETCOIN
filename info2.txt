@@ -1,0 +1,291 @@
+GETCOIN
+
+
+
+Nodes specs:
+Standard B1ms (1 vcpus, 2 GB memory)
+Ubuntu 16.04 LTS HVM
+
+Node names:
+GETCOINNODE1
+GETCOINNODE2
+
+
+Forked from Matthuffy / Eightcoin
+
+
+https://cryptonotestarter.org/inner.html
+https://www.youtube.com/watch?v=Jtgbn3h3P9M
+
+git@github.com:h4ckii/GETCOINLIVE.git
+
+Ubuntu 16.04 LTS HVM
+Create private keys for SSH
+
+PEM file needed
+https://www.youtube.com/watch?v=Jtgbn3h3P9M
+
+
+
+GETCOINNODE1
+Username: getadmin
+
+SSH Public key
+ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAw6yvVzmU7AQjlCcLHsUOV+MStxhxJKw9r+IQIHOnCGr/+z+bEIGp6NtLaZiEGL6TQsD1qcxXOd/fd4MheHr4jyYxb8OX3OevpvnnnUl1zrQLlgBfr+ICZ75IHLDVwyElXUVbZkxol4frs5payoHIx1iDKdfTyWU4XzY7rm1GrfstjuIndWh4dmuMbd/Al3+kjYtPCdpg/8Ijkwh6IQniBkFHtHMknTghA8E88dYtIg3Ae5ljT7ZmAQbJGnqIDdkl14oyuLwWE5z+/3PszcHj+tutH8XA5aduN76olD9NtQtiTnwRyGMrhb6EtVIlNnHsMtLbNE8eT0pJtm8RATm/rQ== rsa-key-20180903
+
+Key fingerprint
+ssh-rsa 2048 ba:43:76:c0:98:f3:7f:8d:f0:0b:e3:b6:10:05:40:5f
+
+Key comment
+rsa-key-20180903
+
+Key passphrase
+kfi23$#$#$fdjidfojsio99090303
+
+=================================================
+GETCOINNODE2
+GETADMIN
+
+SSH public key
+ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAl+gbSm/NpbpNAAXtOKgK5Cy6PUJE8jCpXL4AmcFZka7+D6C7qs8NazcGxKOguXQeLzCmpdYvKEID08LLu4XrogjgvGy59tzRtUZIkLw7EV6dI81IXl1m7P8wI/+zxB3DOcnkYOQAV6pWpBNBwYXX0361FYjoq9eLitJoCckZhZvJPp1gJwGMko4FJjN+17Wi3Nn4IiZLz1EcaMedquFp9M5PAloeRL9TrIL/R5+PaCCEOoo1d8o8S589NBtj501YjkEbVUdQz0BOorXeW+N3v6n9voSIV9OYIrIpMhIWLYlYqHzXDs2Gm3vJjiI8PaiUT5jvNKMPmu8eT/A2emmKRw== rsa-key-20181001
+
+key fingerprint
+ssh-rsa 2048 72:00:6d:2c:9e:b1:6f:df:b8:a1:ce:91:e2:f2:b0:06
+
+Key comment
+rsa-key-20181001
+
+
+Key passphrase
+kfi23$#$#$fdjidfojsio99090303
+
+
+
+=================================================
+azure
+
+
+Public IP node1 - 40.113.228.119
+P2P port - 17236
+RPC port - 18236
+
+Public IP node2 - 40.113.235.27
+P2P port - 17236
+RPC port - 18236
+
+================================================
+
+Basics
+Subscription
+Visual Studio Enterprise
+
+================================================================
+tips
+Convert key plus login
+https://askubuntu.com/questions/818929/login-ssh-with-ppk-file-on-ubuntu-terminal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Logins
+
+1)
+GitHub
+H4ckii@gmail.com
+GETCO1n!!
+
+2)
+
+
+
+
+
+
+
+
+
+
+1)	Fork
+Fork from “eightcoin” on Github and rename repository to “GETCOIN”
+
+2)	Change name
+
+Name must be specified twice:
+1. in file src/CryptoNoteConfig.h - CRYPTONOTE_NAME constant
+Example:
+const char CRYPTONOTE_NAME[] = "GETCOIN";
+2. in src/CMakeList.txt file - set_property(TARGET daemon PROPERTY OUTPUT_NAME "YOURCOINNAMEd")
+Example:
+set_property(TARGET daemon PROPERTY OUTPUT_NAME "furiouscoind")
+Note: You should also change a repository name.
+set_property(TARGET ConnectivityTool PROPERTY OUTPUT_NAME "Coinconn")
+set_property(TARGET SimpleWallet PROPERTY OUTPUT_NAME "GETCoinwallet")
+set_property(TARGET PaymentGateService PROPERTY OUTPUT_NAME "GETCoingate")
+set_property(TARGET Miner PROPERTY OUTPUT_NAME "GETCoinminer")
+set_property(TARGET Daemon PROPERTY OUTPUT_NAME "GETCoind")
+
+
+
+
+
+
+3)	Emission logic
+
+
+1.	Total money supply — src/CryptoNoteConfig.h
+Total amount of coins to be emitted. Most of CryptoNote-based coins use (uint64_t)(-1) (equals to 18446744073709551616). You can define number explicitly (for example UINT64_C(858986905600000000)).
+Example: 
+const uint64_t MONEY_SUPPLY = (uint64_t)(-1);
+2.	Emission curve — src/CryptoNoteConfig.h
+By default CryptoNote provides emission formula with a slight decrease of block reward each block. This is different from Bitcoin where block reward halves every 4 years.
+EMISSION_SPEED_FACTOR constant defines emission curve slope. This parameter is required to calulate block reward.
+Example: 
+const unsigned EMISSION_SPEED_FACTOR = 18;
+3.	Difficulty target — src/CryptoNoteConfig.h
+Difficulty target is an ideal time period between blocks. In case an average time between blocks becomes less than difficulty target, difficulty increases. Difficulty target is measured in seconds.
+Difficulty target directly influences several aspects of coin's behavior:
+— transaction confirmation speed: the longer time between the blocks is, the slower transaction confirmation is
+— emission speed: the longer the time between blocks is the slower the emission is
+— orphan rate: chains with very fast blocks have greater orphan rate
+For most coins difficulty target is 60 or 120 seconds.
+Example: 
+const uint64_t DIFFICULTY_TARGET = 120;
+4.	Block reward formula
+In case you are not satisfied with CryptoNote default implementation of block reward logic you can also change it. The implementation is in src/CryptoNoteCore/Currency.cpp:
+bool Currency::getBlockReward(size_t medianSize, size_t currentBlockSize, uint64_t alreadyGeneratedCoins, uint64_t fee, uint64_t& reward, int64_t& emissionChange) const
+This function has two parts:
+—basic block reward calculation
+uint64_t baseReward = (m_moneySupply - alreadyGeneratedCoins) >> m_emissionSpeedFactor;
+—big block penalty calculation
+This is the way CryptoNote protects chain from transaction flooding attacks and preserves opportunities for organic network growth at the same time.
+Only the first part of this function is directly related to emission logic. You can change it the way you want. See MonetaVerde and DarkNote as the examples where this function is modified.
+Emission calculator
+You may play around with DIFFICULTY_TARGET and EMISSION_SPEED_FACTOR parameters and check how your coin's emission will look like compared to Bitcoin. The graph below projects emission percentage for the first 30 years.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4)	Networking
+
+1.	Default ports for P2P and RPC networking — src/CryptoNoteConfig.h
+P2P port is used by daemons to communicate with each other through P2P protocol.
+RPC port is used by wallet and other software to communicate with the daemon.
+It's better to choose ports that aren't used by some other software. See known TCP ports lists:
+— http://www.speedguide.net/ports.php
+— http://www.networksorcery.com/enp/protocol/ip/ports00000.htm
+— http://keir.net/portlist.html
+Example:
+const int P2P_DEFAULT_PORT = 17236;
+const int RPC_DEFAULT_PORT = 18236;
+2.	Network identifier — src/P2p/P2pNetworks.h
+This identifier is used for network packages in order not to mix two different cryptocoin networks. Change all bytes to random values for your network:
+const static boost::uuids::uuid CRYPTONOTE_NETWORK = { { 0xA1, 0x1A, 0xA1, 0x1A, 0xA1, 0x0A, 0xA1, 0x0A, 0xA0, 0x1A, 0xA0, 0x1A, 0xA0, 0x1A, 0xA1, 0x1A } };
+3.	Seed nodes — src/CryptoNoteConfig.h
+Add IP addresses of your seed nodes. 
+Example: 
+const std::initializer_list<const char*> SEED_NODES = {
+  "111.11.11.11:17236",
+  "222.22.22.22:17236",
+};
+
+4.	Allow ports on Azure VM’s
+Allow port 17236 and 18236 to the inbound port rules for both nodes on Azure
+Node External facing IPs 40.113.228.119 and 40.113.235.27
+
+
+
+
+
+5)	Transaction fee and related parameters
+
+1.	Minimum transaction fee — src/CryptoNoteConfig.h
+Zero minimum fee can lead to transaction flooding. Transactions cheaper than the minimum transaction fee wouldn't be accepted by daemons. 100000 value for MINIMUM_FEE is usually enough.
+Example:
+const uint64_t MINIMUM_FEE = 100000;
+2.	Penalty free block size — src/CryptoNoteConfig.h
+CryptoNote protects chain from tx flooding by reducing block reward for blocks larger than the median block size. However, this rule applies for blocks larger than CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE bytes.
+Example:
+const size_t CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE = 20000;
+
+6)	Address prefix
+
+You may choose a letter (in some cases several letters) all the coin's public addresses will start with. It is defined by CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX constant. Since the rules for address prefixes are nontrivial you may use the prefix generator tool below.
+Example:
+const uint64_t CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX = 0xe9; // addresses start with "f"
+
+7)	Genesis Block
+8)	Build the binaries with a blank genesis tx hex — src/CryptoNoteConfig.h
+You should leave const char GENESIS_COINBASE_TX_HEX[] blank and compile the binaries without it.
+Example:
+const char GENESIS_COINBASE_TX_HEX[] = "";
+9)	Start the daemon to print out the genesis block
+Run your daemon with --print-genesis-tx argument. It will print out the genesis block coinbase transaction hash.
+Example:
+furiouscoind --print-genesis-tx
+10)	Insert the printed transaction hash — src/CryptoNoteConfig.h
+Copy the tx hash that has been printed out by the deamon to GENESIS_COINBASE_TX_HEX in src/CryptoNoteConfig.h 
+Example:
+const char GENESIS_COINBASE_TX_HEX[] = "013c01ff0001ffff...785a33d9ebdba68b0";
+11)	Recompile the binaries
+
+
+
+
+Compile code
+Use Ubuntu 16 to compile
+Git clone https://github.com/getcoin/getcoin.git
+
+Run
+sudo apt install build-essential libqt4-dev qt5-qmake cmake qttools5-dev libqt5webkit5-dev qttools5-dev-tools qt5-default python-sphinx texlive-latex-base inotify-tools openssl libssl-dev libdb++-dev libminiupnpc-dev git sqlite3 libsqlite3-dev g++ libpng-dev gedit python gcc make libbz2-dev libdb-dev libssl-dev libreadline-dev autoconf libtool libleveldb-dev libblkid-dev e2fslibs-dev libboost-all-dev libaudit-dev nano qtbase5-dev qt4-dev-tools libqtcore4 libqtgui4 automake -y
+
+then make.
+Print Genesis block
+Then recompile
+
+
+Connect to NODES
+Create PEM files
+sudo apt-get install putty-tools
+
+puttygen private key.ppk -O private-openssh -o server1.pem
+puttygen private key node 2.ppk -O private-openssh -o server1.pem
+
+
+
+
